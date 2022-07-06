@@ -41,6 +41,7 @@ left_tools = {
 # Rleave
 
 def command(action="", action_type="", robot="", tool="", target=""):
+    '''Function to generate string command to send to YuMi'''
     if robot == "":
         return(action)
     elif robot == "R":
@@ -51,6 +52,7 @@ def command(action="", action_type="", robot="", tool="", target=""):
         return("error")
 
 def send(command):
+    '''Function to send string command to YuMi and wait for it to get confirmation from YuMi'''
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((HOST, PORT))
     s.sendall(bytes(command,'utf-8'))
