@@ -14,10 +14,10 @@ MODULE Module1
    !CONST robtarget gridOrigin:=[[0,0,10],[0.5,-0.5,0.5,-0.5],[0,0,0,4],[-108,9E+09,9E+09,9E+09,9E+09,9E+09]];
    !CONST robtarget arenaOrigin:=[[0,0,10],[0.5,-0.5,0.5,-0.5],[0,0,0,4],[-108,9E+09,9E+09,9E+09,9E+09,9E+09]];
 
-   CONST tooldata rGripper := [ TRUE, [ [0, 0, 0], [1, 0, 0 ,0] ], [0.262, [7.8, 11.9, 50.7], [1, 0, 0, 0], 0.00022, 0.00024, 0.00009] ];
-   CONST tooldata rPipette := [ TRUE, [ [68, 55, 45], [1, 0, 0 ,0] ], [0.262, [7.8, 11.9, 50.7], [1, 0, 0, 0], 0.00022, 0.00024, 0.00009] ];
+   PERS tooldata rGripper := [ TRUE, [ [0, 0, 0], [1, 0, 0 ,0] ], [0.262, [7.8, 11.9, 50.7], [1, 0, 0, 0], 0.00022, 0.00024, 0.00009] ];
+   PERS tooldata rSucker := [ TRUE, [ [68, 55, 45], [1, 0, 0 ,0] ], [0.262, [7.8, 11.9, 50.7], [1, 0, 0, 0], 0.00022, 0.00024, 0.00009] ];
 
-   VAR tooldata tools{2} := [rGripper, rSucker];
+   !VAR tooldata tools{2} := [rGripper, rSucker];
 
    VAR socketdev serverSocket;
    VAR socketdev clientSocket;
@@ -26,13 +26,14 @@ MODULE Module1
 
    VAR string data;
    PERS string state := "executed";
-   PERS string dat := "leave";
+   PERS string dat := "Rleave";
 
    PERS string robot;
    PERS string action;
    PERS string action_type;
-   PERS string tool_index;
-   PERS string target_index;
+   PERS string tool_index := "1";
+   PERS string target;
+   PERS string target_index := "1";
 
    VAR string data_to_send;
    CONST robtarget vial_1:=[[382.26,-286.35,123.83],[0.482297,-0.5219,0.501286,-0.493683],[1,1,1,4],[177.511,9E+09,9E+09,9E+09,9E+09,9E+09]];
@@ -41,8 +42,8 @@ MODULE Module1
    VAR robtarget targets{2} := [vial_1, vial_hold_closed];
 
    VAR bool ok;
-   PERS num index_tool;
-   PERS num index_target;
+   PERS num index_tool := 1;
+   PERS num index_target := 1 ;
 
    !VAR num poshash;
    !VAR num posat;
@@ -121,18 +122,28 @@ MODULE Module1
             IF dat = "Rgrip" THEN
                 g_GripIn;
                 WaitRob\InPos;
+                state := "executed";
+                SocketSend clientSocket \Str:=state;
+                SocketClose clientSocket;
+                SocketClose serverSocket;
             ENDIF
             IF dat = "Rleave" THEN
                 g_GripOut;
                 WaitRob\InPos;
+                state := "executed";
+                SocketSend clientSocket \Str:=state;
+                SocketClose clientSocket;
+                SocketClose serverSocket;
             ENDIF
             IF robot="R" THEN
                 IF action_type = "L" THEN
-                    MoveL targets{index_target},v100,z10,tools{index_tool};
+                    !MoveL targets{index_target},v100,z10,tools{index_tool};
+                    MoveL targets{index_target},v100,z10,rGripper;
                     WaitRob\InPos;
                 ENDIF
                 IF action_type = "J" THEN
-                    MoveJ targets{index_target},v100,z10,tools{index_tool};
+                    !MoveJ targets{index_target},v100,z10,tools{index_tool};
+                    MoveJ targets{index_target},v100,z10,rGripper;
                     WaitRob\InPos;
                 ENDIF
 

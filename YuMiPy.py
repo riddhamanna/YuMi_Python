@@ -40,8 +40,14 @@ left_tools = {
 # Rgrip
 # Rleave
 
-def command(action="", action_type="", robot="", tool="", target=""):
+def gen_command(action="", action_type="", robot="", tool="", target=""):
     '''Function to generate string command to send to YuMi'''
+    print(action)
+    print(action_type)
+    print(robot)
+    print(tool)
+    print(target)
+
     if robot == "":
         return(action)
     elif robot == "R":
@@ -51,12 +57,15 @@ def command(action="", action_type="", robot="", tool="", target=""):
     else:
         return("error")
 
-def send(command):
+def send(comm):
     '''Function to send string command to YuMi and wait for it to get confirmation from YuMi'''
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect((HOST, PORT))
-    s.sendall(bytes(command,'utf-8'))
-    data = s.recv(1024)
-    time.sleep(0.5)
-    s.close()
-    return(repr(data))
+    # s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    # s.connect((HOST, PORT))
+    # s.sendall(bytes(comm,'utf-8'))
+    # data = s.recv(1024)
+    # time.sleep(0.5)
+    # s.close()
+    # return(repr(data))
+    return(comm)
+
+print(gen_command(("MOVE","J","L","lGripper","bridge_lcd_CO2")))

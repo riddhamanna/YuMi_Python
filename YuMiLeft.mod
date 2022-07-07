@@ -32,12 +32,12 @@ MODULE Module1
     !CONST robtarget testL2:=[[467.60,-118.65,227.50],[0.00462144,-0.999751,0.0180568,-0.0122352],[0,1,1,0],[-125.663,9E+09,9E+09,9E+09,9E+09,9E+09]];
 
 
-    CONST tooldata lGripper := [ TRUE, [ [0, 0, 0], [1, 0, 0 ,0] ], [0.262, [7.8, 11.9, 50.7], [1, 0, 0, 0], 0.00022, 0.00024, 0.00009] ];
-    CONST tooldata lSucker := [ TRUE, [ [42, 12, 38], [1, 0, 0 ,0] ], [0.262, [7.8, 11.9, 50.7], [1, 0, 0, 0], 0.00022, 0.00024, 0.00009] ];
+    PERS tooldata lGripper := [ TRUE, [ [0, 0, 0], [1, 0, 0 ,0] ], [0.262, [7.8, 11.9, 50.7], [1, 0, 0, 0], 0.00022, 0.00024, 0.00009] ];
+    PERS tooldata lSucker := [ TRUE, [ [42, 12, 38], [1, 0, 0 ,0] ], [0.262, [7.8, 11.9, 50.7], [1, 0, 0, 0], 0.00022, 0.00024, 0.00009] ];
 
-    VAR tooldata tools{2} := [lGripper, lSucker];
+    !VAR tooldata tools{2} := [lGripper, lSucker];
 
-    PERS string dat := "leave";
+    PERS string dat := "Rleave";
     PERS string state := "executed";
 
     PERS string robot;
@@ -79,10 +79,12 @@ MODULE Module1
             IF dat = "Lgrip" THEN
                 g_GripIn;
                 WaitRob\InPos;
+                state := "Lexecuted";
             ENDIF
             IF dat = "Lleave" THEN
                 g_GripOut;
                 WaitRob\InPos;
+                state := "Lexecuted";
             ENDIF
             IF dat = "LgripPlateFromLCD" THEN
                 LgripPlateFromLCD;
@@ -102,11 +104,13 @@ MODULE Module1
             ENDIF
             IF robot="L" THEN
                 IF action_type = "L" THEN
-                    MoveL targets{index_target},v100,z10,tools{index_tool};
+                    !MoveL targets{index_target},v100,z10,tools{index_tool};
+                    MoveL targets{index_target},v100,z10,lGripper;
                     WaitRob\InPos;
                 ENDIF
                 IF action_type = "J" THEN
-                    MoveJ targets{index_target},v100,z10,tools{index_tool};
+                    !MoveJ targets{index_target},v100,z10,tools{index_tool};
+                    MoveJ targets{index_target},v100,z10,lGripper;
                     WaitRob\InPos;
                 ENDIF
 
