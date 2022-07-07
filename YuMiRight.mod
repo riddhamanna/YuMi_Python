@@ -26,14 +26,14 @@ MODULE Module1
 
    VAR string data;
    PERS string state := "executed";
-   PERS string dat := "Rleave";
+   PERS string dat := "L_MOVE_L_1_2";
 
    PERS string robot;
    PERS string action;
    PERS string action_type;
-   PERS string tool_index := "1";
+   PERS string tool_index := "";
    PERS string target;
-   PERS string target_index := "1";
+   PERS string target_index := "";
 
    VAR string data_to_send;
    CONST robtarget vial_1:=[[382.26,-286.35,123.83],[0.482297,-0.5219,0.501286,-0.493683],[1,1,1,4],[177.511,9E+09,9E+09,9E+09,9E+09,9E+09]];
@@ -43,7 +43,7 @@ MODULE Module1
 
    VAR bool ok;
    PERS num index_tool := 1;
-   PERS num index_target := 1 ;
+   PERS num index_target := 2 ;
 
    !VAR num poshash;
    !VAR num posat;

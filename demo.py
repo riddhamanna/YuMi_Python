@@ -14,11 +14,11 @@ import time
 #     time.sleep(1)
 
 # grip in left gripper
-# yp.send(yp.command("Lleave"))
+yp.send(yp.gen_command("Lleave"))
 time.sleep(1)
 
 # grip out right gripper
-# yp.send(yp.command("Rgrip"))
+yp.send(yp.gen_command("Rgrip"))
 time.sleep(1)
 
 # pick plate 1 from LCD to CO2 pad and back:
@@ -37,21 +37,21 @@ time.sleep(1)
 # linear move to bridge position
 demo_commands_pickNplace_plate = [["MOVE","J","L","lGripper","bridge_lcd_CO2"],
                                   ["MOVE","L","L","lGripper","plate_on_lcd_1"],
-                                  ["LgripFromLCD"],
+                                  ["LgripPlateFromLCD","","","",""],
                                   ["MOVE","L","L","lGripper","bridge_lcd_CO2"],
                                   ["MOVE","L","L","lGripper","plate_on_CO2"],
-                                  ["LdropPlateOnCO2"],
+                                  ["LdropPlateOnCO2","","","",""],
                                   ["MOVE","L","L","lGripper","bridge_lcd_CO2"],
                                   ["MOVE","L","L","lGripper","plate_on_CO2"],
-                                  ["LgripPlateFromCO2"],
+                                  ["LgripPlateFromCO2","","","",""],
                                   ["MOVE","L","L","lGripper","bridge_lcd_CO2"],
                                   ["MOVE","L","L","lGripper","plate_on_lcd_1"],
-                                  ["LdropPlateOnLCD"],
+                                  ["LdropPlateOnLCD","","","",""],
                                   ["MOVE","L","L","lGripper","bridge_lcd_CO2"],
                                   ]
 
 for comm in demo_commands_pickNplace_plate:
-    print(yp.send(yp.command(comm[0],comm[0],comm[0],comm[0],comm[0])))
+    yp.send(yp.gen_command(comm[0],comm[1],comm[2],comm[3],comm[4]))
     time.sleep(0.5)
 
 print("demo executed")

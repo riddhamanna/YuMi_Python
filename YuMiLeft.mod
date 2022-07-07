@@ -37,7 +37,7 @@ MODULE Module1
 
     !VAR tooldata tools{2} := [lGripper, lSucker];
 
-    PERS string dat := "Rleave";
+    PERS string dat := "L_MOVE_L_1_2";
     PERS string state := "executed";
 
     PERS string robot;
@@ -48,8 +48,8 @@ MODULE Module1
 
 
     VAR bool ok;
-    VAR num index_tool;
-    VAR num index_target;
+    PERS num index_tool;
+    PERS num index_target;
 
 
     CONST robtarget plate_on_lcd_1:=[[409.84,457.95,403.65],[0.00212622,-0.674497,-0.738239,-0.00725704],[0,0,1,4],[-119.526,9E+09,9E+09,9E+09,9E+09,9E+09]];

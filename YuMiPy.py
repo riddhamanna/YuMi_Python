@@ -59,13 +59,10 @@ def gen_command(action="", action_type="", robot="", tool="", target=""):
 
 def send(comm):
     '''Function to send string command to YuMi and wait for it to get confirmation from YuMi'''
-    # s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    # s.connect((HOST, PORT))
-    # s.sendall(bytes(comm,'utf-8'))
-    # data = s.recv(1024)
-    # time.sleep(0.5)
-    # s.close()
-    # return(repr(data))
-    return(comm)
-
-print(gen_command(("MOVE","J","L","lGripper","bridge_lcd_CO2")))
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect((HOST, PORT))
+    s.sendall(bytes(comm,'utf-8'))
+    data = s.recv(1024)
+    time.sleep(0.5)
+    s.close()
+    return(repr(data))
