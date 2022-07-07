@@ -14,12 +14,12 @@ import time
 #     time.sleep(1)
 
 # grip in left gripper
-yp.send(yp.gen_command("Lleave"))
-time.sleep(1)
+# yp.send(yp.gen_command("Lgrip"))
+# time.sleep(1)
 
 # grip out right gripper
-yp.send(yp.gen_command("Rgrip"))
-time.sleep(1)
+# yp.send(yp.gen_command("Rleave"))
+# time.sleep(1)
 
 # pick plate 1 from LCD to CO2 pad and back:
 # joint move to bridge position
@@ -51,7 +51,7 @@ demo_commands_pickNplace_plate = [["MOVE","J","L","lGripper","bridge_lcd_CO2"],
                                   ]
 
 for comm in demo_commands_pickNplace_plate:
-    yp.send(yp.gen_command(comm[0],comm[1],comm[2],comm[3],comm[4]))
+    print(yp.send(yp.gen_command(comm[0],comm[1],comm[2],comm[3],comm[4])))
     time.sleep(0.5)
 
 print("demo executed")

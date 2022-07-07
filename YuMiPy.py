@@ -42,11 +42,6 @@ left_tools = {
 
 def gen_command(action="", action_type="", robot="", tool="", target=""):
     '''Function to generate string command to send to YuMi'''
-    print(action)
-    print(action_type)
-    print(robot)
-    print(tool)
-    print(target)
 
     if robot == "":
         return(action)
@@ -65,4 +60,4 @@ def send(comm):
     data = s.recv(1024)
     time.sleep(0.5)
     s.close()
-    return(repr(data))
+    return(str(data))
