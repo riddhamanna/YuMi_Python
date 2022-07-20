@@ -12,7 +12,7 @@ MODULE Module1
    VAR socketdev clientSocket;
    VAR string data;
    PERS string state := "executed";
-   PERS string dat := "L_MOVE_L_1_2";
+   PERS string dat := "L_MOVE_L_1_1";
    VAR string data_to_send;
 
    PERS string robot;
@@ -23,7 +23,7 @@ MODULE Module1
    PERS string target_index := "";
    VAR bool ok;
    PERS num index_tool := 1;
-   PERS num index_target := 2 ;
+   PERS num index_target := 1 ;
 
 
     PROC main()

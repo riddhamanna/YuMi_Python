@@ -4,12 +4,13 @@ MODULE Module1
     PERS tooldata lSucker := [ TRUE, [ [42, 12, 38], [1, 0, 0 ,0] ], [0.262, [7.8, 11.9, 50.7], [1, 0, 0, 0], 0.00022, 0.00024, 0.00009] ];
     PERS tooldata currentTool;
 
-    CONST robtarget plate_on_lcd_1:=[[409.84,457.95,403.65],[0.00212622,-0.674497,-0.738239,-0.00725704],[0,0,1,4],[-119.526,9E+09,9E+09,9E+09,9E+09,9E+09]];
     CONST robtarget bridge_lcd_CO2:=[[469.60,126.75,541.36],[0.00234211,0.0279703,0.999606,0.000966869],[0,0,0,4],[-120.431,9E+09,9E+09,9E+09,9E+09,9E+09]];
     CONST robtarget plate_on_CO2:=[[473.91,125.93,221.19],[0.0134908,0.00500809,-0.999896,0.00127611],[-1,1,-1,4],[-120.192,9E+09,9E+09,9E+09,9E+09,9E+09]];
-    VAR robtarget targets{3} := [plate_on_lcd_1, bridge_lcd_CO2, plate_on_CO2 ];
+    CONST robtarget plate_on_lcd_1:=[[421.46,400.57,294.21],[0.00601114,-0.702671,-0.711268,-0.0177686],[-1,1,1,4],[125.69,9E+09,9E+09,9E+09,9E+09,9E+09]];
 
-    PERS string dat := "L_MOVE_L_1_2";
+    VAR robtarget targets{3} := [ bridge_lcd_CO2, plate_on_lcd_1, plate_on_CO2 ];
+
+    PERS string dat := "L_MOVE_L_1_1";
     PERS string state := "executed";
 
     PERS string robot;
@@ -20,6 +21,8 @@ MODULE Module1
     VAR bool ok;
     PERS num index_tool;
     PERS num index_target;
+
+
 
 
     PROC main()
@@ -80,19 +83,19 @@ MODULE Module1
      PROC LgripPlateFromLCD()
         g_GripOut;
         WaitRob\InPos;
-        MoveL Offs(CRobT(),0,0,-43),v100,z10,lGripper;
+        MoveL Offs(CRobT(),0,0,-40),v100,z10,lGripper;
         WaitRob\InPos;
         g_GripIn;
-        MoveL Offs(CRobT(),0,0,43),v100,z10,lGripper;
+        MoveL Offs(CRobT(),0,0,40),v100,z10,lGripper;
         WaitRob\InPos;
     ENDPROC
      PROC LdropPlateOnLCD()
         !g_GripIn;
         WaitRob\InPos;
-        MoveL Offs(CRobT(),0,0,-43),v100,z10,lGripper;
+        MoveL Offs(CRobT(),0,0,-41),v100,z10,lGripper;
         WaitRob\InPos;
         g_GripOut;
-        MoveL Offs(CRobT(),0,0,43),v100,z10,lGripper;
+        MoveL Offs(CRobT(),0,0,41),v100,z10,lGripper;
         WaitRob\InPos;
     ENDPROC
     PROC LgripPlateFromCO2()
