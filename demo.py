@@ -17,7 +17,7 @@ import time
 # linear move to bridge position
 demo_commands_pickNplace_plate = [
     ["MOVE", "J", "L", "lGripper", "bridge_lcd_CO2"],
-    ["MOVE", "L", "L", "lGripper", "plate_on_lcd_1"],
+    ["MOVE", "L", "L", "lGripper", "plate_on_lcd_2"],
     ["LgripPlateFromLCD", "", "", "", ""],
     ["MOVE", "L", "L", "lGripper", "bridge_lcd_CO2"],
     ["MOVE", "L", "L", "lGripper", "plate_on_CO2"],
