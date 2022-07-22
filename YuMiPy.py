@@ -8,7 +8,7 @@ PORT = 4646  # The port used by the server
 
 right_targets = {"vial_1": "1", "vial_hold_closed": "2"}
 
-left_targets = {"bridge_lcd_CO2": "1", "plate_on_lcd_1": "2", "plate_on_CO2": "3"}
+left_targets = {"bridge_lcd_CO2": "1", "plate_on_lcd_1": "2", "plate_on_lcd_2": "3", "plate_on_CO2": "4"}
 
 right_tools = {"rGripper": "1", "rSucker": "2"}
 
