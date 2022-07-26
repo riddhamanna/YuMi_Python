@@ -6,11 +6,12 @@ MODULE Module1
 
     CONST robtarget bridge_lcd_CO2:=[[469.60,126.75,541.36],[0.00234211,0.0279703,0.999606,0.000966869],[0,0,0,4],[-120.431,9E+09,9E+09,9E+09,9E+09,9E+09]];
     CONST robtarget plate_on_CO2:=[[473.91,125.93,221.19],[0.0134908,0.00500809,-0.999896,0.00127611],[-1,1,-1,4],[-120.192,9E+09,9E+09,9E+09,9E+09,9E+09]];
-    CONST robtarget plate_on_lcd_1:=[[421.46,400.57,294.21],[0.00601114,-0.702671,-0.711268,-0.0177686],[-1,1,1,4],[125.69,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget plate_on_lcd_1:=[[416.00,395.46,294.03],[0.011255,0.718489,0.694978,0.0255325],[-1,1,1,4],[125.838,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget plate_on_lcd_2:=[[413.89,560.05,294.38],[0.0286882,0.714294,0.69858,0.0307649],[-1,1,1,4],[133.482,9E+09,9E+09,9E+09,9E+09,9E+09]];
 
-    VAR robtarget targets{3} := [ bridge_lcd_CO2, plate_on_lcd_1, plate_on_CO2 ];
+    VAR robtarget targets{4} := [bridge_lcd_CO2, plate_on_lcd_1, plate_on_lcd_2, plate_on_CO2 ];
 
-    PERS string dat := "L_MOVE_L_1_1";
+    PERS string dat := "R_MOVE_L_1_2";
     PERS string state := "executed";
 
     PERS string robot;
@@ -21,6 +22,7 @@ MODULE Module1
     VAR bool ok;
     PERS num index_tool;
     PERS num index_target;
+
 
 
 
