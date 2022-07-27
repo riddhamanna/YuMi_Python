@@ -6,7 +6,7 @@ PORT = 4646  # The port used by the server
 
 # Declare robtargets and tools according to the targets listed in the 'targets' arrays in the left and right modules in the same order
 
-right_targets = {"vial_1": "1", "vial_hold_closed": "2"}
+right_targets = {"vial_1": "1", "vial_hold_closed": "2", "vial_hold_open": "3", "vial_on_pad_upright": "4", "vial_on_pad_inverted": "5",}
 
 left_targets = {
     "bridge_lcd_CO2": "1",
@@ -31,6 +31,7 @@ left_tools = {"lGripper": "1", "lSucker": "2"}
 # Right specific commands:
 # Rgrip
 # Rleave
+# RgripVialFromHolder
 
 
 def gen_command(action="", action_type="", robot="", tool="", target=""):

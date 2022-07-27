@@ -31,7 +31,27 @@ demo_commands_pickNplace_plate = [
     ["MOVE", "L", "L", "lGripper", "bridge_lcd_CO2"],
 ]
 
-for comm in demo_commands_pickNplace_plate:
+demo_commands_vialGripOpenClose = [
+    ["MOVE", "J", "R", "rGripper", "vial_1"],
+    ["RgripVialFromHolder", "", "", "", ""],
+    ["MOVE", "L", "R", "rGripper", "vial_hold_open"],
+    ["MOVE", "L", "R", "rGripper", "vial_hold_closed"],
+    ["Lgrip", "", "", "", ""],
+    ["MOVE", "L", "R", "rGripper", "vial_hold_open"],
+    ["MOVE", "L", "R", "rGripper", "vial_on_pad_upright"],
+    ["MOVE", "L", "R", "rGripper", "vial_on_pad_inverted"],
+    ["MOVE", "L", "R", "rGripper", "vial_on_pad_upright"],
+    ["MOVE", "L", "R", "rGripper", "vial_hold_open"],
+    ["MOVE", "L", "R", "rGripper", "vial_hold_closed"],
+    ["Lleave", "", "", "", ""],
+    ["MOVE", "L", "R", "rGripper", "vial_hold_open"],
+]
+
+# for comm in demo_commands_pickNplace_plate:
+#     print(yp.send(yp.gen_command(comm[0], comm[1], comm[2], comm[3], comm[4])))
+#     time.sleep(0.5)
+
+for comm in demo_commands_vialGripOpenClose:
     print(yp.send(yp.gen_command(comm[0], comm[1], comm[2], comm[3], comm[4])))
     time.sleep(0.5)
 
