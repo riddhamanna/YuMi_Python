@@ -6,13 +6,16 @@ MODULE Module1
 
    CONST robtarget vial_1:=[[382.26,-290.35,123.83],[0.482297,-0.5219,0.501286,-0.493683],[1,1,1,4],[177.511,9E+09,9E+09,9E+09,9E+09,9E+09]];
    CONST robtarget vial_hold_closed:=[[358.75,124.59,399.17],[0.482274,-0.521953,0.50126,-0.493675],[1,2,0,4],[177.512,9E+09,9E+09,9E+09,9E+09,9E+09]];
-   VAR robtarget targets{2} := [vial_1, vial_hold_closed];
+   CONST robtarget vial_hold_open:=[[358.74,124.57,348.23],[0.48226,-0.521963,0.501263,-0.493674],[1,2,0,4],[177.508,9E+09,9E+09,9E+09,9E+09,9E+09]];
+   CONST robtarget vial_on_pad_upright:=[[205.48,-133.44,153.70],[0.482241,-0.52197,0.501278,-0.493671],[1,1,0,4],[177.511,9E+09,9E+09,9E+09,9E+09,9E+09]];
+   CONST robtarget vial_on_pad_inverted:=[[205.48,-133.45,153.62],[0.490126,0.50509,0.518289,0.485836],[1,1,-2,4],[177.511,9E+09,9E+09,9E+09,9E+09,9E+09]];
+   VAR robtarget targets{5} := [vial_1, vial_hold_closed, vial_hold_open, vial_on_pad_upright, vial_on_pad_inverted];
 
    VAR socketdev serverSocket;
    VAR socketdev clientSocket;
    VAR string data;
    PERS string state := "executed";
-   PERS string dat := "R_MOVE_L_1_2";
+   PERS string dat := "R_MOVE_L_1_4";
    VAR string data_to_send;
 
    PERS string robot;
@@ -20,10 +23,13 @@ MODULE Module1
    PERS string action_type;
    PERS string tool_index := "1";
    PERS string target;
-   PERS string target_index := "2";
+   PERS string target_index := "4";
    VAR bool ok;
    PERS num index_tool := 1;
-   PERS num index_target := 2 ;
+   PERS num index_target := 4 ;
+
+
+
 
 
     PROC main()
@@ -113,7 +119,7 @@ MODULE Module1
     PROC RgripVialFromHolder()
         g_GripOut;
         WaitRob\InPos;
-        MoveL Offs(CRobT(),50,0,0),v100,z10,rGripper;
+        MoveL Offs(CRobT(),53,0,0),v100,z10,rGripper;
         WaitRob\InPos;
         g_GripIn;
         MoveL Offs(CRobT(),0,0,50),v100,z10,rGripper;

@@ -11,7 +11,7 @@ MODULE Module1
 
     VAR robtarget targets{4} := [bridge_lcd_CO2, plate_on_lcd_1, plate_on_lcd_2, plate_on_CO2 ];
 
-    PERS string dat := "R_MOVE_L_1_2";
+    PERS string dat := "R_MOVE_L_1_3";
     PERS string state := "executed";
 
     PERS string robot;
