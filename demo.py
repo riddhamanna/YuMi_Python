@@ -32,6 +32,7 @@ demo_commands_pickNplace_plate = [
 ]
 
 demo_commands_vialGripOpenClose = [
+    ["MOVE", "J", "L", "lGripper", "bridge_lcd_CO2"],
     ["MOVE", "J", "R", "rGripper", "vial_1"],
     ["RgripVialFromHolder", "", "", "", ""],
     ["MOVE", "L", "R", "rGripper", "vial_hold_open"],
