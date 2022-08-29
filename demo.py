@@ -46,7 +46,13 @@ demo_commands_vialGripOpenClose = [
     ["MOVE", "L", "R", "rGripper", "vial_hold_closed"],
     ["Lleave", "", "", "", ""],
     ["MOVE", "L", "R", "rGripper", "vial_hold_open"],
+    ["MOVE", "L", "R", "rGripper", "vial_1"],
+    ["RplaceVialInHolder", "", "", "", ""],
 ]
+
+# for comm in demo_commands_pickNplace_plate:
+#     print(yp.send(yp.gen_command(comm[0], comm[1], comm[2], comm[3], comm[4])))
+#     time.sleep(0.5)
 
 # for comm in demo_commands_pickNplace_plate:
 #     print(yp.send(yp.gen_command(comm[0], comm[1], comm[2], comm[3], comm[4])))
