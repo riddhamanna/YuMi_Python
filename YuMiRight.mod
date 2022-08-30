@@ -28,6 +28,13 @@ MODULE Module1
    VAR bool ok;
    PERS num index_tool := 1;
    PERS num index_target := 1 ;
+   VAR num posLastUnderscore;
+   VAR num posHash1;
+   VAR num posHash2;
+   PERS num offX;
+   PERS num offY;
+   PERS num offZ;
+
    VAR num testNum := 0;
    VAR string testString := "-2.0";
 
@@ -63,10 +70,21 @@ MODULE Module1
               robot := StrPart(dat,1,1);
               action := StrPart(dat,3,4);
               action_type := StrPart(dat,8,1);
+
               tool_index := StrPart(dat,10,1);
               ok:= StrToVal(tool_index,index_tool);
-              target_index := StrPart(dat,12,StrFind(dat,12,"_")-12);
+
+              ok:=StrToVal(StrFind(dat,12,"_"),posLastUnderscore);
+              ok:=StrToVal(StrFind(dat,posLastUnderscore+1,"#"),posHash1);
+              ok:=StrToVal(StrFind(dat,posHash1+1,"#"),posHash2);
+
+              target_index := StrPart(dat,12,posLastUnderscore-12);
               ok := StrToVal(target_index,index_target);
+
+              ok := StrToVal(StrPart(dat,posLastUnderscore+1,posHash1-posLastUnderscore-1),offX)
+              ok := StrToVal(StrPart(dat,posHash1+1,posHash2-posHash1-1),offY)
+              ok := StrToVal(StrPart(dat,posHash2+1,StrLen(dat)-posHash2),offZ)
+
          ENDIF
        ENDIF
 
@@ -106,14 +124,30 @@ MODULE Module1
                 CASE 1: currentTool := rGripper;
                 CASE 2: currentTool := rSucker;
                 ENDTEST
-                GetDataVal targets{index_target}, currentTarget;
-                IF action_type = "L" THEN
-                    MoveL currentTarget,v100,z10,currentTool;
-                    WaitRob\InPos;
+                IF index_target = 0 THEN
+                    currentTarget := CRobT();
+                ELSE
+                    GetDataVal targets{index_target}, currentTarget;
                 ENDIF
-                IF action_type = "J" THEN
-                    MoveJ currentTarget,v100,z10,currentTool;
-                    WaitRob\InPos;
+                IF ACTION = "MOVE" THEN
+                    IF action_type = "L" THEN
+                        MoveL currentTarget,v100,z10,currentTool;
+                        WaitRob\InPos;
+                    ENDIF
+                    IF action_type = "J" THEN
+                        MoveJ currentTarget,v100,z10,currentTool;
+                        WaitRob\InPos;
+                    ENDIF
+                ENDIF
+                IF ACTION = "OFFS" THEN
+                    IF action_type = "L" THEN
+                        MoveL Offs(currentTarget,offX,offY,offZ),v100,z10,currentTool;
+                        WaitRob\InPos;
+                    ENDIF
+                    IF action_type = "J" THEN
+                        MoveJ Offs(currentTarget,offX,offY,offZ),v100,z10,currentTool;
+                        WaitRob\InPos;
+                    ENDIF
                 ENDIF
 
                 state := "executed";

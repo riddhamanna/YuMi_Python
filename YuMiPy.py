@@ -7,6 +7,7 @@ PORT = 4646  # The port used by the server
 # Declare robtargets and tools according to the targets listed in the 'targets' arrays in the left and right modules in the same order
 
 right_targets = {
+    "current_pos": "0",
     "vial_1": "1",
     "vial_hold_closed": "2",
     "vial_hold_open": "3",
@@ -15,6 +16,7 @@ right_targets = {
     "CO2_pad_origin": "6",}
 
 left_targets = {
+    "current_pos": "0",
     "bridge_lcd_CO2": "1",
     "plate_on_lcd_1": "2",
     "plate_on_lcd_2": "3",

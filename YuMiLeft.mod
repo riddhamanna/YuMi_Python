@@ -26,6 +26,9 @@ MODULE Module1
     VAR bool ok;
     PERS num index_tool;
     PERS num index_target;
+    PERS num offX;
+    PERS num offY;
+    PERS num offZ;
 
 
 
@@ -73,14 +76,30 @@ MODULE Module1
                 CASE 1: currentTool := lGripper;
                 CASE 2: currentTool := lSucker;
                 ENDTEST
-                GetDataVal targets{index_target}, currentTarget;
-                IF action_type = "L" THEN
-                    MoveL currentTarget,v100,z10,currentTool;
-                    WaitRob\InPos;
+                IF index_target = 0 THEN
+                    currentTarget := CRobT();
+                ELSE
+                    GetDataVal targets{index_target}, currentTarget;
                 ENDIF
-                IF action_type = "J" THEN
-                    MoveJ currentTarget,v100,z10,currentTool;
-                    WaitRob\InPos;
+                IF ACTION = "MOVE" THEN
+                    IF action_type = "L" THEN
+                        MoveL currentTarget,v100,z10,currentTool;
+                        WaitRob\InPos;
+                    ENDIF
+                    IF action_type = "J" THEN
+                        MoveJ currentTarget,v100,z10,currentTool;
+                        WaitRob\InPos;
+                    ENDIF
+                ENDIF
+                IF ACTION = "OFFS" THEN
+                    IF action_type = "L" THEN
+                        MoveL Offs(currentTarget,offX,offY,offZ),v100,z10,currentTool;
+                        WaitRob\InPos;
+                    ENDIF
+                    IF action_type = "J" THEN
+                        MoveJ Offs(currentTarget,offX,offY,offZ),v100,z10,currentTool;
+                        WaitRob\InPos;
+                    ENDIF
                 ENDIF
 
                 state := "Lexecuted";
