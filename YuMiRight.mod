@@ -15,8 +15,8 @@ MODULE Module1
    VAR socketdev serverSocket;
    VAR socketdev clientSocket;
    VAR string data;
-   PERS string state := "executed";
-   PERS string dat := "RplaceVialInHolder";
+   PERS string state := "unexecuted";
+   PERS string dat := "L_MOVE_L_1_1_";
    VAR string data_to_send;
 
    PERS string robot;
@@ -28,6 +28,8 @@ MODULE Module1
    VAR bool ok;
    PERS num index_tool := 1;
    PERS num index_target := 1 ;
+   VAR num testNum := 0;
+   VAR string testString := "-2.0";
 
 
 
@@ -37,6 +39,9 @@ MODULE Module1
     PROC main()
 
         g_Init;
+        ok := StrToVal(testString,testNum);
+        TPWrite " "\Num:=testNum;
+
 
         IF state = "Lexecuted" and SocketGetStatus(serverSocket)<>SOCKET_CLOSED THEN
             state := "executed";
@@ -60,7 +65,7 @@ MODULE Module1
               action_type := StrPart(dat,8,1);
               tool_index := StrPart(dat,10,1);
               ok:= StrToVal(tool_index,index_tool);
-              target_index := StrPart(dat,12,StrLen(dat)-11);
+              target_index := StrPart(dat,12,StrFind(dat,12,"_")-12);
               ok := StrToVal(target_index,index_target);
          ENDIF
        ENDIF
@@ -147,6 +152,8 @@ MODULE Module1
         MoveL Offs(CRobT(),0,0,50),v100,z10,rGripper;
         WaitRob\InPos;
         MoveL Offs(CRobT(),-52,0,0),v100,z10,rGripper;
+        WaitRob\InPos;
+        MoveL Offs(CRobT(),0,0,-50),v100,z10,rGripper;
         WaitRob\InPos;
     ENDPROC
 ENDMODULE

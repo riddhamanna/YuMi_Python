@@ -40,7 +40,7 @@ left_tools = {"lGripper": "1", "lSucker": "2"}
 # RgripVialFromHolder
 
 
-def gen_command(action="", action_type="", robot="", tool="", target=""):
+def gen_command(action="", action_type="", robot="", tool="", target="", x="", y="",z=""):
     """Function to generate string command to send to YuMi"""
 
     if robot == "":
@@ -56,6 +56,12 @@ def gen_command(action="", action_type="", robot="", tool="", target=""):
             + right_tools[tool]
             + "_"
             + right_targets[target]
+            + "_"
+            + x
+            + "#"
+            + y
+            + "#"
+            + z
         )
     elif robot == "L":
         return (
@@ -68,6 +74,12 @@ def gen_command(action="", action_type="", robot="", tool="", target=""):
             + left_tools[tool]
             + "_"
             + left_targets[target]
+            +"_"
+            + x
+            + "#"
+            + y
+            + "#"
+            + z
         )
     else:
         return "error"
