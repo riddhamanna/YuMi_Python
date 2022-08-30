@@ -50,11 +50,23 @@ demo_commands_vialGripOpenClose = [
     ["RplaceVialInHolder", "", "", "", "", "", "", ""],
 ]
 
-for comm in demo_commands_pickNplace_plate:
-    print(yp.send(yp.gen_command(comm[0], comm[1], comm[2], comm[3], comm[4])))
-    time.sleep(0.5)
+demo_commands_rasterCO2pad = [
+    ["MOVE", "J", "R", "rSucker", "CO2_pad_origin", "", "", ""],
+    ["OFFS", "L", "R", "rSucker", "current_pos", "50", "50", ""],
+    ["MOVE", "L", "R", "rSucker", "CO2_pad_origin", "", "", ""],
+    ["OFFS", "L", "R", "rSucker", "CO2_pad_origin", "100", "50", ""],
+    ["MOVE", "L", "R", "rSucker", "CO2_pad_origin", "", "", ""],
+]
 
-for comm in demo_commands_vialGripOpenClose:
+# for comm in demo_commands_pickNplace_plate:
+#     print(yp.send(yp.gen_command(comm[0], comm[1], comm[2], comm[3], comm[4])))
+#     time.sleep(0.5)
+#
+# for comm in demo_commands_vialGripOpenClose:
+#     print(yp.send(yp.gen_command(comm[0], comm[1], comm[2], comm[3], comm[4])))
+#     time.sleep(0.5)
+
+for comm in demo_commands_rasterCO2pad:
     print(yp.send(yp.gen_command(comm[0], comm[1], comm[2], comm[3], comm[4])))
     time.sleep(0.5)
 
