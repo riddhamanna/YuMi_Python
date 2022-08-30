@@ -15,7 +15,7 @@ MODULE Module1
     VAR robtarget testPos:=[[438.31,-18.16,327.27],[0.00310321,0.00173247,-0.999969,-0.0069552],[0,1,-1,4],[-128.234,9E+09,9E+09,9E+09,9E+09,9E+09]];
     VAR robtarget testTarget;
 
-    PERS string dat := "RplaceVialInHolder";
+    PERS string dat := "R_MOVE_L_2_6_##";
     PERS string state := "executed";
 
     PERS string robot;
@@ -26,9 +26,9 @@ MODULE Module1
     VAR bool ok;
     PERS num index_tool;
     PERS num index_target;
-    PERS num offX;
-    PERS num offY;
-    PERS num offZ;
+    PERS num offX := 50;
+    PERS num offY := 100;
+    PERS num offZ := 0;
 
 
 

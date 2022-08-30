@@ -9,34 +9,34 @@ MODULE Module1
    VAR robtarget vial_hold_open:=[[358.74,124.57,348.23],[0.48226,-0.521963,0.501263,-0.493674],[1,2,0,4],[177.508,9E+09,9E+09,9E+09,9E+09,9E+09]];
    VAR robtarget vial_on_pad_upright:=[[205.48,-133.44,153.70],[0.482241,-0.52197,0.501278,-0.493671],[1,1,0,4],[177.511,9E+09,9E+09,9E+09,9E+09,9E+09]];
    VAR robtarget vial_on_pad_inverted:=[[205.48,-133.45,153.62],[0.490126,0.50509,0.518289,0.485836],[1,1,-2,4],[177.511,9E+09,9E+09,9E+09,9E+09,9E+09]];
-   VAR robtarget CO2_pad_origin:=[[182.09,-191.13,184.02],[0.50416,-0.531641,0.497275,-0.464648],[1,1,0,4],[-176.821,9E+09,9E+09,9E+09,9E+09,9E+09]];
    VAR string targets{6} := ["vial_1", "vial_hold_closed", "vial_hold_open", "vial_on_pad_upright", "vial_on_pad_inverted", "CO2_pad_origin"];
    VAR robtarget currentTarget;
    VAR socketdev serverSocket;
    VAR socketdev clientSocket;
    VAR string data;
    PERS string state := "executed";
-   PERS string dat := "RplaceVialInHolder";
+   PERS string dat := "R_MOVE_L_2_6_##";
    VAR string data_to_send;
 
    PERS string robot;
    PERS string action;
    PERS string action_type;
-   PERS string tool_index := "1";
+   PERS string tool_index := "2";
    PERS string target;
-   PERS string target_index := "1";
+   PERS string target_index := "6";
    VAR bool ok;
-   PERS num index_tool := 1;
-   PERS num index_target := 1 ;
+   PERS num index_tool := 2;
+   PERS num index_target := 6 ;
    VAR num posLastUnderscore;
    VAR num posHash1;
    VAR num posHash2;
-   PERS num offX;
-   PERS num offY;
-   PERS num offZ;
+   PERS num offX := 50;
+   PERS num offY := 100;
+   PERS num offZ := 0;
 
    VAR num testNum := 0;
    VAR string testString := "-2.0";
+   VAR robtarget CO2_pad_origin:=[[230.44,-252.33,125.68],[0.515019,-0.497518,0.516136,-0.46993],[1,1,1,4],[178.923,9E+09,9E+09,9E+09,9E+09,9E+09]];
 
 
 
@@ -46,8 +46,6 @@ MODULE Module1
     PROC main()
 
         g_Init;
-        ok := StrToVal(testString,testNum);
-        TPWrite " "\Num:=testNum;
 
 
         IF state = "Lexecuted" and SocketGetStatus(serverSocket)<>SOCKET_CLOSED THEN
