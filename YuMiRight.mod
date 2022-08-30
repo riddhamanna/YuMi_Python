@@ -15,8 +15,8 @@ MODULE Module1
    VAR socketdev serverSocket;
    VAR socketdev clientSocket;
    VAR string data;
-   PERS string state := "unexecuted";
-   PERS string dat := "L_MOVE_L_1_1_";
+   PERS string state := "executed";
+   PERS string dat := "RplaceVialInHolder";
    VAR string data_to_send;
 
    PERS string robot;
@@ -74,16 +74,16 @@ MODULE Module1
               tool_index := StrPart(dat,10,1);
               ok:= StrToVal(tool_index,index_tool);
 
-              ok:=StrToVal(StrFind(dat,12,"_"),posLastUnderscore);
-              ok:=StrToVal(StrFind(dat,posLastUnderscore+1,"#"),posHash1);
-              ok:=StrToVal(StrFind(dat,posHash1+1,"#"),posHash2);
+              posLastunderscore := StrFind(dat,12,"_");
+              posHash1 := StrFind(dat,posLastUnderscore+1,"#");
+              posHash2 := StrFind(dat,posHash1+1,"#");
 
               target_index := StrPart(dat,12,posLastUnderscore-12);
               ok := StrToVal(target_index,index_target);
 
-              ok := StrToVal(StrPart(dat,posLastUnderscore+1,posHash1-posLastUnderscore-1),offX)
-              ok := StrToVal(StrPart(dat,posHash1+1,posHash2-posHash1-1),offY)
-              ok := StrToVal(StrPart(dat,posHash2+1,StrLen(dat)-posHash2),offZ)
+              ok := StrToVal(StrPart(dat,posLastUnderscore+1,posHash1-posLastUnderscore-1),offX);
+              ok := StrToVal(StrPart(dat,posHash1+1,posHash2-posHash1-1),offY);
+              ok := StrToVal(StrPart(dat,posHash2+1,StrLen(dat)-posHash2),offZ);
 
          ENDIF
        ENDIF
