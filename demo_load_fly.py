@@ -49,11 +49,11 @@ bottomrightID = 4
 
 width = 300
 height = 200
-factor = 1
+factor = 2
 
-cap = cv2.VideoCapture(0)
-cap.set(cv2.CAP_PROP_FRAME_WIDTH,1920)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT,1080)
+cap = cv2.VideoCapture(2)
+cap.set(cv2.CAP_PROP_FRAME_WIDTH,4096)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT,3000)
 
 ptsSrc = [[0,0],[width*factor,0],[0,height*factor],[width*factor,height*factor]]
 ptsDes = np.float32([[0,0],[width*factor,0],[0,height*factor],[width*factor,height*factor]])
@@ -63,11 +63,6 @@ cv2.namedWindow('image')
 while True:
 	ret, image = cap.read()
 	# cv2.imwrite("grid.png",img)
-	h,w,layers = image.shape
-	h = int(h/factor)
-	w = int(w/factor)
-	image = cv2.resize(image,(w,h))
-
 	arucoDict = cv2.aruco.Dictionary_get(ARUCO_DICT[arucoDictStr])
 	arucoParams = cv2.aruco.DetectorParameters_create()
 	(corners, ids, rejected) = cv2.aruco.detectMarkers(image, arucoDict, parameters=arucoParams)
@@ -114,15 +109,18 @@ while True:
 			if markerID == bottomrightID:
 				ptsSrc[3]=bottomRight
 				target_corners_found += 1
-
+	h,w,layers = image.shape
+	h = int(h/factor)
+	w = int(w/factor)
+	image = cv2.resize(image,(w,h))
 	cv2.imshow("image",image)
 	if target_corners_found == 4:
 		ptsSrc = np.float32(ptsSrc)
 		TrMat = cv2.getPerspectiveTransform(ptsSrc,ptsDes)
 		transformed = cv2.warpPerspective(image,TrMat,(width*factor,height*factor))
 		cv2.imshow("transformed",transformed)
-	else :
-		cv2.destroyWindow("transformed")
+	# else :
+	# 	cv2.destroyWindow("transformed")
 
 	if cv2.waitKey(1) & 0xFF == 27:#ord('q'):
 		break
